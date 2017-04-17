@@ -23,7 +23,7 @@ import { MaterialModule } from '@angular/material';
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
