@@ -17,11 +17,12 @@ export class ChartComponent implements OnInit {
   constructor( public backendApi: BitcoinApiService) { }
   public options: any;
   public data: any;
-  public btce_array = [{timestampVal:1490572800, currencyVal:1030}];
-  el: any;
+  public btce_array = [];
   chart: any;
   svg: any;
   ngOnInit(){
+    this.getApiData();
+    this.data = this.btcUsdHistory();
     Observable.interval(1000*10).subscribe(x => {
       this.getApiData();
       this.data = this.btcUsdHistory();
@@ -45,24 +46,26 @@ export class ChartComponent implements OnInit {
           bottom: 40,
           left: 55
         },
+        background: '#222',
         x: function(d){ return d.timestampVal; },
         y: function(d){ return d.currencyVal; },
         showValues: true,
         useInteractiveGuideline: true,
+        valueFormat: function(d){
+          return d3.format(',.4f')(d);
+        },
         xAxis: {
           axisLabel: 'Time (ms)'
         },
         yAxis: {
           axisLabel: 'BTC (v)',
           tickFormat: function(d){
-             return d3.format('.02f')(d);
+            return d3.format(',.1f')(d);
           },
           axisLabelDistance: -10
         }
       }
     };
-
-    this.data = this.btcUsdHistory();
   }
 
   private getApiData() : void{
@@ -77,16 +80,16 @@ export class ChartComponent implements OnInit {
         values:  this.btce_array,      //values - represents the array of {x,y} data points
         key: 'Price', //key  - the name of the series.
         color: '#ff7f0e',  //color - optional: choose your own line color.
-        area: true
+        area: true,
+        background: '#222'
       }
     ];
   }
   private set_data(res: Response) {
-    let data_array = res.json()
+    let data_array = res.json();
     for (let currency of data_array){
-      this.btce_array.push({timestampVal: currency['x'], currencyVal: currency['y']})
+      this.btce_array.push({timestampVal: currency['x'], currencyVal: currency['y']});
     }
-    // console.log(this.btce_array)
   }
 
 
