@@ -1,0 +1,16 @@
+.tab{
+    font-size: 1.4em;
+    font-weight: bold;
+}
+a .is-active{
+    background-color: cornflowerblue;
+    color: cornflowerblue
+}
+
+.sebm-google-map-container {
+  height: 300px;
+}
+/*.centered{
+    margin-left: 25%;
+    margin-right: 25%;
+}*/
