@@ -24,7 +24,7 @@ app.use(session({
   maxAge: 3600000,
   saveUninitialized: true
 }));
-
+const BASE_URL = 'https://blockchain.info/'
 // APIs
 // select all
 //   nonce = new Date().getTime();
@@ -33,17 +33,12 @@ app.use(session({
 app.get('/get_btc_test', function(req, res) {
   nonce = new Date().getTime();
   params = {
-    // 'step': 900,
-    // 'symbol': 'btcebtcusd',
-    // 'mode': 'simple',
-    // 'nonce': nonce
     'timespan':'20days',
     'format': 'json'
   }
   res.setHeader('Content-Type', 'application/json');
   query_path = querystring.stringify(params)
-  // url_path = 'https://s2.bitcoinwisdom.com/period?'+query_path
-  url_path = 'https://blockchain.info/charts/market-price?'+query_path;
+  url_path = BASE_URL+'charts/market-price?'+query_path;
   request({
     url: url_path,
     method: 'GET'
