@@ -24,7 +24,7 @@ app.use(session({
   maxAge: 3600000,
   saveUninitialized: true
 }));
-const BASE_URL = 'https://blockchain.info/'
+const BASE_BLOCKCHAIN_URL = 'https://blockchain.info/'
 // APIs
 // select all
 //   nonce = new Date().getTime();
@@ -38,7 +38,7 @@ app.get('/get_btc_test', function(req, res) {
   }
   res.setHeader('Content-Type', 'application/json');
   query_path = querystring.stringify(params)
-  url_path = BASE_URL+'charts/market-price?'+query_path;
+  url_path = BASE_BLOCKCHAIN_URL+'charts/market-price?'+query_path;
   request({
     url: url_path,
     method: 'GET'
