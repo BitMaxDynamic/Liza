@@ -22,8 +22,9 @@ export class ChartComponent implements OnInit {
   chart: any;
   svg: any;
   ngOnInit(){
-    Observable.interval(3000).subscribe(x => {
+    Observable.interval(1000*10).subscribe(x => {
       this.getApiData();
+      this.data = this.btcUsdHistory();
     });
     this.options = {
       chart: {
@@ -61,7 +62,7 @@ export class ChartComponent implements OnInit {
       }
     };
 
-    this.data = this.sinAndCos();
+    this.data = this.btcUsdHistory();
   }
 
   private getApiData() : void{
@@ -69,16 +70,7 @@ export class ChartComponent implements OnInit {
       this.set_data(res)
     });
   }
-  sinAndCos() {
-    var sin = [],sin2 = [],
-      cos = [];
-
-    //Data is represented as an array of {x,y} pairs.
-    // for (var i = 1490572800; i < 1490572900; i++) {
-    //   sin.push({x: i, y: Math.sin(i/10)});
-    //   sin2.push({x: i, y: i % 10 == 5 ? null : Math.sin(i/10) *0.25 + 0.5});
-    //   cos.push({x: i, y: .5 * Math.cos(i/10+ 2) + Math.random() / 10});
-    // }
+  btcUsdHistory() {
     //Line chart data should be sent as an array of series objects.
     return [
       {
@@ -86,19 +78,7 @@ export class ChartComponent implements OnInit {
         key: 'Price', //key  - the name of the series.
         color: '#ff7f0e',  //color - optional: choose your own line color.
         area: true
-      },
-      // {
-      //   values: this.btce_array,
-      //   key: 'Quantity',
-      //   color: '#2ca02c'
-      // },
-      // {
-      //   values: this.btce_array,
-      //   key: 'currency',
-      //   color: '#7777ff',
-      //   area: true      //area - set to true if you want this line to turn into a filled area chart.
-      // }
-
+      }
     ];
   }
   private set_data(res: Response) {
