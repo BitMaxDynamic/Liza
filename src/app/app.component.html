@@ -39,13 +39,33 @@
 <nav class="navbar navbar">
   <md-sidenav-container class="example-container">
     <md-sidenav #sidenav class="example-sidenav">
-      <md-input-container>
-        <input mdInput placeholder="Email" value="">
-      </md-input-container>
-      <md-input-container >
-        <input type="password" mdInput placeholder="Password" value="">
-      </md-input-container>
-      <button md-raised-button><span>Log In</span></button>
+      <md-tab-group >
+        <md-tab label="Log In">
+          <md-input-container>
+            <input mdInput placeholder="Email" value="">
+          </md-input-container>
+          <md-input-container >
+            <input type="password" mdInput placeholder="Password" value="">
+          </md-input-container>
+          <button md-raised-button><span>Log In</span></button>
+        </md-tab>
+        <md-tab label="Sign Up">
+          <md-input-container>
+            <input mdInput placeholder="Name" value="">
+          </md-input-container>
+          <md-input-container>
+            <input mdInput placeholder="Email" value="">
+          </md-input-container>
+
+          <md-input-container >
+            <input type="password" mdInput placeholder="Password" value="">
+          </md-input-container>
+          <md-input-container >
+            <input type="password" mdInput placeholder="Confirm password" value="">
+          </md-input-container>
+          <button md-raised-button><span>Log In</span></button>
+        </md-tab>
+      </md-tab-group>
 
     </md-sidenav>
     <div class="example-sidenav-content">
