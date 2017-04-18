@@ -12,9 +12,7 @@ var zlib = require('zlib');
 var app = express();
 var querystring = require('querystring');
 app.set('port', (process.env.PORT || 3000));
-
 app.use('/', express.static(__dirname + './../../dist'));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
@@ -31,22 +29,21 @@ const BASE_BLOCKCHAIN_URL = 'https://blockchain.info/'
   // url_request = 'https://s2.bitcoinwisdom.com/period?step=900&symbol=btcebtcusd&mode=simple&nonce='+nonce;
   // url_request = 'https://s2.bitcoinwisdom.com/depth?symbol=btcebtcusd&nonce='+nonce;
 app.get('/get_btc_test', function(req, res) {
-  nonce = new Date().getTime();
   params = {
     'timespan':'20days',
     'format': 'json'
   }
-  res.setHeader('Content-Type', 'application/json');
   query_path = querystring.stringify(params)
   url_path = BASE_BLOCKCHAIN_URL+'charts/market-price?'+query_path;
   request({
     url: url_path,
     method: 'GET'
   }, function (err, response, body) {
+    if(err) return res.status(500).json(err.message);
     response_body = JSON.parse(body);
+    res.status(200);
     res.json(response_body['values']);
   });
-
 });
 
 // all other routes are handled by Angular
