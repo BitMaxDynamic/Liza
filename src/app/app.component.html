@@ -18,26 +18,48 @@
 
       </ul>
       <ul class="nav navbar-inverse navbar-right ">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li ><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li ><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li ><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li ><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li ><a href="#">BUY / SELL <span class="sr-only"></span></a></li>
+        <li ><a href="#"> MARKET DATA <span class="sr-only">(current)</span></a></li>
+        <li ><a href="#">MARGIN TRADING <span class="sr-only">(current)</span></a></li>
+        <li ><a (click)="sidenav.open()">GET STARTED<span class="sr-only">(current)</span></a></li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div class="tabs is-boxed is-centered">
+  <ul>
+    <li routerLinkActive="is-active">
+      <span class="icon is-large"></span>
+      <span class="tab">Market BTC 1236$</span>
 
-  <div class="tabs is-boxed is-centered">
-    <ul>
-      <li routerLinkActive="is-active">
-          <span class="icon is-large"></span>
-          <span class="tab">Market</span>
-      </li>
-    </ul>
-  </div>
-  <div class="container">
-    <h1>Get Market Chart</h1>
-    <app-chart></app-chart>
-  </div>
+    </li>
+  </ul>
+</div>
+<nav class="navbar navbar">
+  <md-sidenav-container class="example-container">
+    <md-sidenav #sidenav class="example-sidenav">
+      <md-input-container>
+        <input mdInput placeholder="Email" value="">
+      </md-input-container>
+      <md-input-container >
+        <input type="password" mdInput placeholder="Password" value="">
+      </md-input-container>
+      <button md-raised-button><span>Log In</span></button>
+
+    </md-sidenav>
+    <div class="example-sidenav-content">
+      <button md-button (click)="sidenav.open()">
+        Log In
+      </button>
+
+      <div class="container">
+        <h1>Get Market Chart</h1>
+        <app-chart></app-chart>
+      </div>
+    </div>
+  </md-sidenav-container>
+</nav>
+
+
   <router-outlet></router-outlet>

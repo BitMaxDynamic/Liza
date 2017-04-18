@@ -1,17 +1,35 @@
 a ,span{
-  font-size: 20px;
+  font-size: 18px;
+  color: #10b7af;
 }
 
 .navbar-brand{
   position: relative;
-  left:80%;
-  color: aqua;
+  top: 3px;
+  left:4%;
+  color: #10b7af;
 }
 .navbar-text{
   background: #222;
-  margin-left: 250px;
-  color: #fff;
 }
-.navbar-inverse{
-  padding-right: 50px;
+.nav > li > a{
+  padding:17px 15px;
+}
+.example-container {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.mat-sidenav-transition .mat-sidenav{
+  width: 18%;
+}
+.example-sidenav {
+  padding: 20px;
 }
