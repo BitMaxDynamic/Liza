@@ -1,8 +1,8 @@
 import {Component, OnInit, OnChanges, ElementRef, Inject, ViewChild} from '@angular/core';
-import {BitcoinApiService} from "../bitcoin.api.service";
-import {Response} from "@angular/http";
-import {Observable} from "rxjs";
-declare let d3: any;
+import {BitcoinApiService} from '../bitcoin.api.service';
+import {Response} from '@angular/http';
+import {Observable} from 'rxjs';
+declare const d3: any;
 
 @Component({
   selector: 'app-chart',
@@ -17,13 +17,12 @@ export class ChartComponent implements OnInit {
   constructor( public backendApi: BitcoinApiService) { }
   public options: any;
   public data: any;
-  public btce_array = [];
+  public btce_array = [{timestampVal: 1490572800, currencyVal: 1030}];
+  el: any;
   chart: any;
   svg: any;
   ngOnInit(){
-    this.getApiData();
-    this.data = this.btcUsdHistory();
-    Observable.interval(1000*10).subscribe(x => {
+    Observable.interval(1000 * 10).subscribe(x => {
       this.getApiData();
       this.data = this.btcUsdHistory();
     });
@@ -32,13 +31,13 @@ export class ChartComponent implements OnInit {
         type: 'lineChart',
         height: 450,
         dimensions: [
-          "economy (mpg)",
-          "cylinders",
-          "displacement (cc)",
-          "power (hp)",
-          "weight (lb)",
-          "0-60 mph (s)",
-          "year"
+          'economy (mpg)',
+          'cylinders',
+          'displacement (cc)',
+          'power (hp)',
+          'weight (lb)',
+          '0-60 mph (s)',
+          'year'
         ],
         margin : {
           top: 20,
@@ -46,26 +45,24 @@ export class ChartComponent implements OnInit {
           bottom: 40,
           left: 55
         },
-        background: '#222',
         x: function(d){ return d.timestampVal; },
         y: function(d){ return d.currencyVal; },
         showValues: true,
         useInteractiveGuideline: true,
-        valueFormat: function(d){
-          return d3.format(',.4f')(d);
-        },
         xAxis: {
           axisLabel: 'Time (ms)'
         },
         yAxis: {
           axisLabel: 'BTC (v)',
           tickFormat: function(d){
-            return d3.format(',.1f')(d);
+             return d3.format('.02f')(d);
           },
           axisLabelDistance: -10
         }
       }
     };
+
+    this.data = this.btcUsdHistory();
   }
 
   private getApiData() : void{

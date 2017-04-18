@@ -1,6 +1,14 @@
 <div>
-  <nvd3 [options]="options" [data]="data"></nvd3>
+
+  <md-tab-group>
+    <md-tab label="Market BTC">
+      <div>
+        <nvd3 [options]="options" [data]="data"></nvd3>
+      </div>
+    </md-tab>
+    <md-tab label="Market LTC">Coming soon</md-tab>
+    <md-tab label="Market ETH">Coming soon</md-tab>
+    <md-tab label="Market USD">Coming soon</md-tab>
+    <md-tab label="Market DSH">Coming soon</md-tab>
+  </md-tab-group>
 </div>
-<md-input-container>
-  <input mdInput placeholder="Favorite food" value="Sushi">
-</md-input-container>
