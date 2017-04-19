@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs';
-import {Http, Response} from "@angular/http";
+import {Http, Response} from '@angular/http';
 
 @Injectable()
 export class BitcoinApiService {
@@ -20,9 +20,9 @@ export class BitcoinApiService {
   public response: any;
   public error: string;
   private btcTestUrl = 'get_btc_test';
-  constructor(private http: Http){}
+  constructor(private http: Http) {}
 
-  public get_market_data(){
+  public get_market_data() {
   let project = new ReplaySubject(1);
    project.subscribe(result => this.setResult(result));
    return this.http.get(this.btcTestUrl)
@@ -46,11 +46,11 @@ export class BitcoinApiService {
     return Observable.throw(errMsg);
   }
 
-  private setResult(result: any){
-    this.response=result;
+  private setResult(result: any) {
+    this.response = result;
   }
 
-  public getResponse(){
+  public getResponse() {
     return this.response;
   }
 

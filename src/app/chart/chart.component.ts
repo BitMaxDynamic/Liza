@@ -17,6 +17,9 @@ export class ChartComponent implements OnInit {
   public options: any;
   public data: any;
   public btce_array = [];
+  public value_end: any;
+  public value_e: number;
+
   el: any;
   chart: any;
   svg: any;
@@ -92,6 +95,8 @@ export class ChartComponent implements OnInit {
     for (const currency of data_array){
       this.btce_array.push({timestampVal: currency['x'], currencyVal: currency['y']});
     }
+    this.value_end = this.btce_array.slice(-1).pop();
+    this.value_e = this.value_end.currencyVal.toFixed(3);
     this.setChart();
   }
 
