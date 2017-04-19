@@ -14,14 +14,14 @@ declare const d3: any;
 
 export class ChartComponent implements OnInit {
 
-  constructor( public backendApi: BitcoinApiService) { }
   public options: any;
   public data: any;
   public btce_array = [{timestampVal: 1490572800, currencyVal: 1030}];
   el: any;
   chart: any;
   svg: any;
-  ngOnInit(){
+  constructor( public backendApi: BitcoinApiService) { }
+  ngOnInit() {
     Observable.interval(1000 * 10).subscribe(x => {
       this.getApiData();
       this.data = this.btcUsdHistory();
@@ -65,26 +65,26 @@ export class ChartComponent implements OnInit {
     this.data = this.btcUsdHistory();
   }
 
-  private getApiData() : void{
+  private getApiData(): void {
     this.backendApi.get_market_data().subscribe(res => {
-      this.set_data(res)
+      this.set_data(res);
     });
   }
   btcUsdHistory() {
-    //Line chart data should be sent as an array of series objects.
+    // Line chart data should be sent as an array of series objects.
     return [
       {
-        values:  this.btce_array,      //values - represents the array of {x,y} data points
-        key: 'Price', //key  - the name of the series.
-        color: '#ff7f0e',  //color - optional: choose your own line color.
+        values:  this.btce_array,      // values - represents the array of {x,y} data points
+        key: 'Price', // key  - the name of the series.
+        color: '#ff7f0e',  // color - optional: choose your own line color.
         area: true,
         background: '#222'
       }
     ];
   }
   private set_data(res: Response) {
-    let data_array = res.json();
-    for (let currency of data_array){
+    const data_array = res.json();
+    for (const currency of data_array){
       this.btce_array.push({timestampVal: currency['x'], currencyVal: currency['y']});
     }
   }

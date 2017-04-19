@@ -2,14 +2,7 @@ import {
   Component,
   NgModule
 } from '@angular/core';
-
-import {
-  BrowserModule
-} from '@angular/platform-browser';
-
-import {BitcoinApiService} from "./bitcoin.api.service";
-import {Response} from "@angular/http";
-
+import {BitcoinApiService} from './bitcoin.api.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +12,7 @@ import {Response} from "@angular/http";
 export class AppComponent {
 
 
-  constructor(public apiService: BitcoinApiService){}
+  constructor(public apiService: BitcoinApiService) {}
 
 
 }
