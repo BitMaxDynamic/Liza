@@ -16,16 +16,26 @@ export class ChartComponent implements OnInit {
 
   public options: any;
   public data: any;
-  public btce_array = [{timestampVal: 1490572800, currencyVal: 1030}];
+  public btce_array = [];
   el: any;
   chart: any;
   svg: any;
   constructor( public backendApi: BitcoinApiService) { }
   ngOnInit() {
-    Observable.interval(1000 * 10).subscribe(x => {
-      this.getApiData();
-      this.data = this.btcUsdHistory();
+    this.getDataUpdated();
+  }
+
+  private getApiData(): void {
+    this.backendApi.get_market_data().subscribe(res => {
+      this.set_data(res);
     });
+  }
+  private getDataUpdated(): void {
+    Observable.timer(0, 1000 * 10).subscribe(x => {
+        this.getApiData();
+    });
+  }
+  private setChart(): void {
     this.options = {
       chart: {
         type: 'lineChart',
@@ -55,7 +65,7 @@ export class ChartComponent implements OnInit {
         yAxis: {
           axisLabel: 'BTC (v)',
           tickFormat: function(d){
-             return d3.format('.02f')(d);
+            return d3.format('.02f')(d);
           },
           axisLabelDistance: -10
         }
@@ -65,11 +75,6 @@ export class ChartComponent implements OnInit {
     this.data = this.btcUsdHistory();
   }
 
-  private getApiData(): void {
-    this.backendApi.get_market_data().subscribe(res => {
-      this.set_data(res);
-    });
-  }
   btcUsdHistory() {
     // Line chart data should be sent as an array of series objects.
     return [
@@ -87,6 +92,7 @@ export class ChartComponent implements OnInit {
     for (const currency of data_array){
       this.btce_array.push({timestampVal: currency['x'], currencyVal: currency['y']});
     }
+    this.setChart();
   }
 
 
