@@ -29,7 +29,7 @@ export class ChartComponent implements OnInit {
   }
 
   private getApiData(): void {
-    this.backendApi.get_market_data().subscribe(res => {
+    this.backendApi.get_btce_market_data().subscribe(res => {
       this.set_data(res);
     });
   }

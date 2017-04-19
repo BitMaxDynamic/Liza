@@ -19,15 +19,21 @@ export class BitcoinApiService {
 
   public response: any;
   public error: string;
-  private btcTestUrl = 'get_btc_test';
+  private btcUrl = 'get_btc_e';
+  private bitstampUrl = 'get_bitstamp'
   constructor(private http: Http) {}
 
-  public get_market_data() {
+  public get_btce_market_data() {
   let project = new ReplaySubject(1);
    project.subscribe(result => this.setResult(result));
-   return this.http.get(this.btcTestUrl)
-     // .map(this.extractData)
+   return this.http.get(this.btcUrl)
      .catch(this.handleError);
+  }
+  public get_bitstamp_market_data() {
+    let project = new ReplaySubject(1);
+    project.subscribe(result => this.setResult(result));
+    return this.http.get(this.bitstampUrl)
+      .catch(this.handleError);
   }
   private extractData(res: Response) {
     let body = res.json();
